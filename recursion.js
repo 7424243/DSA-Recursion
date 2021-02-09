@@ -98,3 +98,29 @@ const factorial = function(number) {
 
 console.log(factorial(5)) 
 
+//8. Find a Way Out Of The Maze
+// You have entered a Maze and need to find your way out of it. There are more than one possible paths through the Maze to the single exit point. Write a recursive function that will help you find a possible path through the maze.
+
+//9. Find ALL the ways out of the maze
+// Use the above maze and modify your solution so it finds All the possible exit paths through the Maze. To find all possible exit paths through the maze, think about how many places you can move at each turn. Possibly up, down, left or right?
+
+//10. Anagrams
+//An anagram is any word or phrase that uses the letters of a given ("subject") word or phrase in another, rearranged order. Write a function that creates an anagram list, listing all the rearrangements of a given word. For example, if the user types "east", the program should list all 24 permutations, including "eats", "etas", "teas", and non-words like "tsae".
+
+const anagram = function(subject) {
+    let results = []
+    if(subject.length <= 1) {
+        return [subject]
+    }
+    const string = subject.split('')
+    string.forEach((letter, index) => {
+        let leftLetter = [...string.slice(0, index), ...string.slice(index + 1)].join('')
+        const arrangements = anagram(leftLetter)
+        arrangements.forEach(arrangement => {
+            results.push(letter + arrangement)
+        })
+    })
+    return results
+}
+
+console.log(anagram('east'))

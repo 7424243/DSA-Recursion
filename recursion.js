@@ -193,6 +193,42 @@ Path to the exit: RRDDRRUURRDDDD
 Path to the exit: RRDDRRRRDD
 */
 
+let maze = [
+    [' ', ' ', ' ', '*', ' ', ' ', ' '],
+    ['*', '*', ' ', '*', ' ', '*', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', '*', '*', '*', '*', '*', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', 'e']
+]
+
+const escape = function(maze, pos=0, row=0, col=0, dir='S', path=[]) {
+    if(col < 0 || row < 0 ) {
+        return 
+    } else if(col >= maze[0].length || row >= maze.length) {
+        return
+    }
+    path[pos] = dir
+    pos++
+    if(maze[row][col] === 'e'){
+        console.log(path)
+        return
+    }
+    if(maze[row][col] === ' ') {
+        //the current cell is free. Mark it as visited.
+        maze[row][col] = 's'
+        //explore all possible options
+        escape(maze, pos, row - 1, col, 'U', path)
+        escape(maze, pos, row, col + 1, 'R', path)
+        escape(maze, pos, row + 1, col, 'D', path)
+        escape(maze, pos, row, col - 1, 'L'. path)
+        maze[row][col] = ' '
+    }
+    pos--
+}
+
+escape(maze)
+
+
 /* ======== 10. Anagrams =================
 An anagram is any word or phrase that uses the letters 
 of a given ("subject") word or phrase in another, rearranged 

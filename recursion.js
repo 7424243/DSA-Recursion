@@ -26,3 +26,14 @@ const powerCalculator = function(baseInt, exponentInt) {
     }
     return baseInt * powerCalculator(baseInt, exponentInt - 1)
 }
+
+//3. Reverse String
+//Write a function that reverses a string. Take a string as input, reverse the string, and return the new string.
+
+const reverseString = function(string) {
+    if(string.length === 1) {
+        return string
+    }
+    //use a negative number to slice from the end of a string
+    return string.slice(-1) + reverseString(string.slice(0,-1)) 
+}

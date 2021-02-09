@@ -47,3 +47,17 @@ const triangularNumber = function(number) {
     }
     return number + triangularNumber(number - 1)
 }
+ 
+//5. String Splitter
+//Write a recursive function that splits a string based on a separator (similar to String.prototype.split). Don't use JS array's split function to solve this problem.
+
+const stringSplitter = function(string, separator) {
+    //base case
+    if(string.indexOf(separator) === -1) {
+        return [string.slice(0, string.length)]
+    }
+    //general case
+    return [string.slice(0, string.indexOf(separator)), ...stringSplitter(string.slice(string.indexOf(separator) + 1), separator)]
+}
+
+console.log(stringSplitter('02/20/2020', '/'))

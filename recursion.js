@@ -140,19 +140,45 @@ You have entered a Maze and need to find your way out of it.
 There are more than one possible paths through the Maze to 
 the single exit point. Write a recursive function that will 
 help you find a possible path though the maze.
+*/
 let mySmallMaze = [
     [' ', ' ', ' '],
     [' ', '*', ' '],
     [' ', ' ', 'e']
-];
+]
 let maze = [
     [' ', ' ', ' ', '*', ' ', ' ', ' '],
     ['*', '*', ' ', '*', ' ', '*', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', '*', '*', '*', '*', '*', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', 'e']
-];
-*/
+]
+
+const escape = function(maze, pos=0, row=0, col=0, dir='S', path=[]) {
+    if(col < 0 || row < 0) {
+        return
+    } else if(col >=maze[0].length || row >= maze.length) {
+        return
+    }
+    path[pos] = dir
+    pos++
+    if(maze[row][col] === 'e'){
+        console.log(path)
+        return
+    }
+    if(maze[row][col] === ' ') {
+        //the current cell is free. Mark it as visited.
+        maze[row][col] = 's'
+        //explore all possible options
+        escape(maze, pos, row - 1, col, 'U', path)
+        escape(maze, pos, row, col + 1, 'R', path)
+        escape(maze, pos, row + 1, col, 'D', path)
+        escape(maze, pos, row, col - 1, 'L'. path)
+    }
+    pos--
+}
+
+escape(maze)
 
 /* ======== 9. Find ALL the ways out of the maze =================
 Use the above maze and modify your solution so it finds All the 
